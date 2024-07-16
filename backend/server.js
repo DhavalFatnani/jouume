@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+import JournalRouter from "./routes/journalRoutes";
+import AuthRouter from "./routes/authRoutes";
+import UserRouter from "./routes/userRoutes";
 
 const app = express();
 dotenv.config();
@@ -36,6 +39,10 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.send("Jouume Backend");
 });
+
+app.use("/api/journals", JournalRouter);
+app.use("/api/auth", AuthRouter);
+app.use("/api/users", UserRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);

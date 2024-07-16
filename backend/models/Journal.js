@@ -32,6 +32,28 @@ const JournalSchema = new mongoose.Schema({
   },
 });
 
+JournalSchema.pre("save", function (next) {
+  this.tags = this.tags.map((tag) => tag.toLowerCase());
+  this.entry = this.entry.trim();
+  next();
+});
+
+JournalSchema.pre("update", function (next) {
+  this.tags = this.tags.map((tag) => tag.toLowerCase());
+  next();
+});
+
+JournalSchema.index({
+  title: 1,
+  entry: 1,
+  tags: 1,
+  createdAt: -1,
+});
+
+JournalSchema.virtual("year").get(function () {
+  return this.date.getFullYear();
+});
+
 const Journal = mongoose.model("Journal", JournalSchema);
 
 export default Journal;
