@@ -5,14 +5,16 @@ import {
   createJournal,
   updateJournal,
   deleteJournal,
-} from "../controllers/journalController";
+} from "../controllers/journalController.js";
+
+import auth from "../middleware/authMiddleware.js";
 
 const JournalRouter = express.Router();
 
-JournalRouter.route("/").get(getJournals);
-JournalRouter.route("/").post(createJournal);
-JournalRouter.route("/:id").get(getJournalById);
-JournalRouter.route("/:id").put(updateJournal);
-JournalRouter.route("/:id").delete(deleteJournal);
+JournalRouter.post("/", auth, createJournal);
+JournalRouter.get("/", auth, getJournals);
+JournalRouter.get("/:id", auth, getJournalById);
+JournalRouter.put("/:id", auth, updateJournal);
+JournalRouter.delete("/:id", auth, deleteJournal);
 
 export default JournalRouter;

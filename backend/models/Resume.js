@@ -81,6 +81,42 @@ const SkillSchema = new mongoose.Schema({
   },
 });
 
+const languageSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Language Name Required!"],
+  },
+  proficiency: {
+    type: String,
+    required: [true, "Proficiency Level Required!"],
+  },
+});
+
+const CertificationSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, "Title Required!"],
+  },
+  authority: {
+    type: String,
+    required: [true, "Authority Required!"],
+  },
+  licenseNumber: {
+    type: String,
+  },
+  startDate: {
+    type: Date,
+    required: [true, "Start Date Required!"],
+  },
+  endDate: {
+    type: Date,
+    required: [true, "End Date Required!"],
+  },
+  link: {
+    type: String,
+  },
+});
+
 const ResumeSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -106,14 +142,22 @@ const ResumeSchema = new mongoose.Schema({
     github: {
       type: String,
     },
+    website: {
+      type: String,
+    },
   },
   summary: {
     type: String,
   },
-  eduction: [EducationSchema],
+  education: [EducationSchema],
   experience: [ExperienceSchema],
   projects: [ProjectSchema],
   skills: [SkillSchema],
+  languages: [languageSchema],
+  certifications: [CertificationSchema],
+  hobbies: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

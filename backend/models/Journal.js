@@ -23,7 +23,7 @@ const JournalSchema = new mongoose.Schema({
   },
   mood: {
     type: String,
-    enum: ["happy", "sad", "angry", "anxious", "relaxed", "tired"],
+    enum: ["happy", "sad", "angry", "anxious", "relaxed", "tired", "lazy"],
     required: true,
   },
   important: {

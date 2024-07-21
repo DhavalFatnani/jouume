@@ -2,17 +2,16 @@ import express from "express";
 import {
   getResumes,
   getResumeById,
-  generateResume,
-  updateResume,
+  createOrUpdateResume,
   deleteResume,
-} from "../controllers/resumeController";
+} from "../controllers/resumeController.js";
+import auth from "../middleware/authMiddleware.js";
 
 const ResumeRouter = express.Router();
 
-ResumeRouter.route("/").get(getResumes);
-ResumeRouter.route("/").post(generateResume);
-ResumeRouter.route("/:id").get(getResumeById);
-ResumeRouter.route("/:id").put(updateResume);
-ResumeRouter.route("/:id").delete(deleteResume);
+ResumeRouter.get("/", auth, getResumes);
+ResumeRouter.post("/", auth, createOrUpdateResume);
+ResumeRouter.get("/:id", auth, getResumeById);
+ResumeRouter.delete("/:id", auth, deleteResume);
 
 export default ResumeRouter;
